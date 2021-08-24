@@ -16,11 +16,11 @@ class Category(models.Model):
 
 class Product(TimeStamp):
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     title = models.CharField(max_length=64)
     description = models.TextField(blank=True)
     price = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='products/%Y/%m/%d/')
+    image = models.ImageField(upload_to='products/%Y/%m/%d/', blank=True, null=True)
     is_published = models.BooleanField(default=True)
 
     def __str__(self):
