@@ -81,6 +81,19 @@ const App = () => {
     })
   }
 
+  const handleDelete = (id) => {
+    // fetch all products from backend
+    axios({
+      method: "DELETE",
+      url: `http://127.0.0.1:8000/api/product/${id}`
+    }).then(response => {
+      console.log("Successfulyy deleted !")
+      axiosRefresh();
+    }).catch(error => {
+      console.log(error_message)
+    })
+  }
+
   useEffect(() => {
     axiosRefresh();
   }, [])
@@ -156,7 +169,7 @@ const App = () => {
             <h2>Products</h2>
             <ul>
                 {product.map((product) => (
-                  <li key={product.id}> ${product.price} - {product.title} - {<GetItem array={category} id={product.category} />}</li>
+                  <li key={product.id}> ${product.price} - {product.title} - {<GetItem array={category} id={product.category} />} <button onClick={() => handleDelete(product.id)} style={{marginLeft:"7px"}}> x</button></li>
                 ))}
             </ul>
         </div>
